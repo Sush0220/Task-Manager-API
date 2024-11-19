@@ -60,6 +60,4 @@ describe("Task API", () => {
     expect(createdTask).toHaveProperty("created_at");
     expect(createdTask).toHaveProperty("updated_at");
   });
-
-  // Other tests...
 });
