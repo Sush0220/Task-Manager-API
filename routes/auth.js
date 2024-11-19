@@ -17,12 +17,12 @@ router.post("/register", async (req, res) => {
       return res.status(400).send({ error: "Email and password are required" });
     const existingUser = findUserByEmail(email);
     if (existingUser) {
-      return res.status(400).send({ error: "User already exists" });
+      return res.status(409).send({ error: "User already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = addUser({ email, password: hashedPassword });
     res.status(201).json({
-      message: "user Registered SuccessFully!",
+      message: "User Registered SuccessFully!",
       user: { _id: user.id, email: user.email },
     });
   } catch (err) {

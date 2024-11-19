@@ -34,6 +34,9 @@ router.get("/:id", authenticate, (req, res) => {
 router.post("/", authenticate, async (req, res) => {
   try {
     const { error } = validateTask(req.body);
+    const { title, description, due_date } = req.body;
+    if (!title || !description || !due_date)
+      return res.status(400).send({ error: "All fields are required" });
     if (error) return res.status(400).send({ error: error.details[0].message });
     const newTask = addTask(req.body);
     res.status(201).json({ message: "Task created successfully", newTask });
